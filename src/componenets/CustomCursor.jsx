@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [dotPos, setDotPos] = useState({ x: 0, y: 0 });
-  const [circlePos, setCirclePos] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef(null);
+  const requestRef = useRef(null);
+
   const [active, setActive] = useState(false);
+  const pos = useRef({ x: 0, y: 0 }); // current cursor
+  const circle = useRef({ x: 0, y: 0 }); // circle position
 
   useEffect(() => {
-    const moveMouse = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+    const moveMouse = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY };
+    };
     const addHover = () => setActive(true);
     const removeHover = () => setActive(false);
 
@@ -26,47 +30,34 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Dot follow (fast)
   useEffect(() => {
-    const animateDot = () => {
-      setDotPos((prev) => ({
-        x: prev.x + (mousePos.x - prev.x) * 0.35, // fast
-        y: prev.y + (mousePos.y - prev.y) * 0.35,
-      }));
-      requestAnimationFrame(animateDot);
-    };
-    animateDot();
-  }, [mousePos]);
+    const speed = 0.12; // 0.05–0.2 adjust smoothness
 
-  // Circle follow (slow)
-  useEffect(() => {
-    const animateCircle = () => {
-      setCirclePos((prev) => ({
-        x: prev.x + (dotPos.x - prev.x) * 0.08, // slow, trailing effect
-        y: prev.y + (dotPos.y - prev.y) * 0.08,
-      }));
-      requestAnimationFrame(animateCircle);
+    const animate = () => {
+      // delta
+      const dx = pos.current.x - circle.current.x;
+      const dy = pos.current.y - circle.current.y;
+
+      circle.current.x += dx * speed;
+      circle.current.y += dy * speed;
+
+      // update DOM directly for lag-free movement
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${circle.current.x}px, ${circle.current.y}px, 0) translate(-50%, -50%)`;
+      }
+
+      requestRef.current = requestAnimationFrame(animate);
     };
-    animateCircle();
-  }, [dotPos]);
+
+    animate();
+
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []);
 
   return (
-    <div>
-      <div
-        className={`custom-cursor ${active ? "active" : ""}`}
-        style={{
-          left: circlePos.x,
-          top: circlePos.y,
-        }}
-      >
-        <div
-          className="custom-cursor-dot"
-          style={{
-            left: dotPos.x - circlePos.x,
-            top: dotPos.y - circlePos.y,
-          }}
-        ></div>
-      </div>
-    </div>
+    <div
+      ref={cursorRef}
+      className={`custom-cursor ${active ? "active" : ""}`}
+    ></div>
   );
 }

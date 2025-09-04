@@ -4,6 +4,7 @@ import { Outlet } from "react-router";
 import ThemeSelector from "../componenets/Theme";
 import { useSelector } from "react-redux";
 import Loader from "../componenets/Loader";
+import CustomCursor from "../componenets/CustomCursor";
 
 function MainLayout() {
   const darkTheme = useSelector((state) => state.theme.darkTheme);
@@ -46,6 +47,7 @@ function MainLayout() {
       <Navbar />
       <ThemeSelector />
       <Outlet />
+      <CustomCursor />
     </div>
   );
 }
