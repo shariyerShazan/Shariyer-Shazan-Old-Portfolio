@@ -20,10 +20,21 @@ export default function ProjectCard({ img, name, description, technology, liveLi
 
       <p className="text-sm text-gray-500 mb-4"><strong>Technology:</strong> {technology}</p>
 
-      <div className="flex flex-wrap gap-3">
-        <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <MdOutlinePreview /> Live </a>
-        <a href={clientSide} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <FaGithub /> Client </a>
-        <a href={serverSide} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <FaGithub /> Server </a>
+      <div className="flex flex-wrap gap-3 mt-auto">
+        {liveLink && liveLink !== "#" && (
+          <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <MdOutlinePreview /> Live </a>
+        )}
+        {clientSide && clientSide !== "#" && clientSide !== "# (Confidential)" && (
+          <a href={clientSide} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <FaGithub /> Client </a>
+        )}
+        {serverSide && serverSide !== "#" && (
+          <a href={serverSide} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-4 py-2 border border-primary rounded-full text-primary hover:bg-primary hover:text-white transition"> <FaGithub /> Server </a>
+        )}
+        {(!liveLink || liveLink === "#") && (!clientSide || clientSide === "#") && (!serverSide || serverSide === "#") && (
+          <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-amber-500 bg-amber-500/10 border border-amber-500/20">
+            NDA Protected
+          </span>
+        )}
       </div>
     </div>
   );
