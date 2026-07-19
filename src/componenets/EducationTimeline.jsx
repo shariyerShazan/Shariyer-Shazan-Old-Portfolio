@@ -1,95 +1,127 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
+import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
 
-export default function EducationTimeline() {
-  const [fillHeight, setFillHeight] = useState(0);
-  const sectionRef = useRef(null);
+export default function ExperienceEducation() {
+  const experienceData = [
+    {
+      company: "Betopia",
+      role: "Full Stack Developer (Backend-Focused)",
+      period: "AUG 2025 – PRESENT",
+      location: "Dhaka, Bangladesh",
+      description: [
+        "Engineered the backend for a health & weight-management platform covering 5+ body metrics, subscription-gated provider access, and secure payment processing.",
+        "Delivered an AI meal-recommendation engine (3 input modes: text, voice, image) generating 3 daily targets (calorie, protein, water) plus provider marketplaces and admin panels.",
+        "Shipped 3 production full-stack applications (Node.js, NestJS, PostgreSQL, MongoDB) with Socket.IO and Stripe, and streamlined CI/CD (Docker + GitHub Actions) on AWS."
+      ],
+      tech: [
+        "NestJS", "Node.js", "TypeScript", "PostgreSQL", "MongoDB", "Prisma",
+        "Mongoose", "Redis", "Kafka", "gRPC", "Socket.IO", "Stripe", "Docker", "AWS"
+      ]
+    }
+  ];
 
   const educationData = [
     {
-      side: "left",
-      title: "High School",
-      institute: "Saint Louis High School",
-      duration: "2015 - 2021",
-      gpa: "GPA: 5.00",
-      extra: "Background: Science",
+      school: "Southeast University",
+      degree: "B.Sc. in Computer Science and Engineering",
+      period: "2025 – Present",
+      location: "Dhaka, Bangladesh",
+      details: "Pursuing Bachelor's degree in CSE, specializing in distributed systems and systems architecture."
     },
     {
-      side: "right",
-      title: "College",
-      institute: "BAF Shaheen College Dhaka",
-      duration: "2021 - 2023",
-      gpa: "GPA: 5.00",
-      extra: "Background: Science",
-    },
-    {
-      side: "left",
-      title: "University",
-      institute: "Southeast University",
-      duration: "2024 - Present",
-      gpa: "Department: CSE",
-      extra: "",
-    },
-    {
-      side: "right",
-      title: "Course",
-      institute: "Programming Hero",
-      duration: "MERN Stack Course",
-      gpa: "",
-      extra: "",
-    },
+      school: "BAF Shaheen College",
+      degree: "Higher Secondary Certificate (HSC)",
+      period: "2022 – 2024",
+      location: "Dhaka, Bangladesh",
+      details: "Background: Science. Graduated with a perfect GPA 5.00/5.00."
+    }
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const visible = Math.min((rect.height, windowHeight ) - (rect.top ));
-      const percent = Math.min(1, Math.max(0, visible  / rect.height));
-      setFillHeight(percent * 100);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-16 relative ">
-      <div className="container mx-auto relative">
-        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-1 ">
-          <div
-            className="absolute top-0 left-0 w-full bg-primary transition-all duration-200"
-            style={{ height: `${fillHeight}%` }}
-          ></div>
+    <section id="experience-education" className="py-16 w-full text-text">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        {/* Left Column: Work Experience */}
+        <div>
+          <h2 className="text-3xl font-bold text-primary mb-8 flex items-center gap-3">
+            <FaBriefcase className="text-primary text-2xl" />
+            <span>Work Experience</span>
+          </h2>
+          
+          <div className="space-y-6">
+            {experienceData.map((exp, idx) => (
+              <article 
+                key={idx} 
+                className="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex flex-wrap justify-between items-start gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl font-bold text-primary">{exp.role}</h3>
+                    <p className="text-base font-semibold text-text/80">{exp.company}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-mono font-medium bg-primary/10 text-primary border border-primary/20">
+                      <time>{exp.period}</time>
+                    </span>
+                    <p className="text-xs text-gray-500 mt-1 uppercase font-mono">{exp.location}</p>
+                  </div>
+                </div>
+
+                <ul className="list-disc pl-5 space-y-2 text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                  {exp.description.map((bullet, bIdx) => (
+                    <li key={bIdx}>{bullet}</li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800/60">
+                  {exp.tech.map((t, tIdx) => (
+                    <span 
+                      key={tIdx} 
+                      className="text-[10px] font-mono font-medium text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/15 transition-colors duration-250 hover:bg-primary/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
-        {educationData.map((edu, index) => (
-          <div
-            key={index}
-            className={`mb-12 flex items-center w-full ${
-              edu.side === "left" ? "flex-row" : "flex-row-reverse"
-            }`}
-          >
-            <div className="w-1/2 p-6">
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-primary relative">
-                <h3 className="text-xl font-bold text-primary">{edu.title}</h3>
-                <p className="text-lg font-semibold">{edu.institute}</p>
-                <p className="text-gray-600">{edu.duration}</p>
-                {edu.gpa && <p className="text-gray-800">{edu.gpa}</p>}
-                {edu.extra && <p className="text-gray-600">{edu.extra}</p>}
-                <span
-                  className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white"
-                  style={{
-                    [edu.side === "left" ? "right" : "left"]: "-34px",
-                  }}
-                ></span>
-              </div>
-            </div>
-            <div className="w-1/2"></div>
+        {/* Right Column: Education History */}
+        <div>
+          <h2 className="text-3xl font-bold text-primary mb-8 flex items-center gap-3">
+            <FaGraduationCap className="text-primary text-2xl" />
+            <span>Education History</span>
+          </h2>
+
+          <div className="space-y-6">
+            {educationData.map((edu, idx) => (
+              <article 
+                key={idx} 
+                className="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex flex-wrap justify-between items-start gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl font-bold text-primary">{edu.degree}</h3>
+                    <p className="text-base font-semibold text-text/80">{edu.school}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-mono font-medium bg-primary/10 text-primary border border-primary/20">
+                      <time>{edu.period}</time>
+                    </span>
+                    <p className="text-xs text-gray-500 mt-1 uppercase font-mono">{edu.location}</p>
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {edu.details}
+                </p>
+              </article>
+            ))}
           </div>
-        ))}
+        </div>
+
       </div>
     </section>
   );
