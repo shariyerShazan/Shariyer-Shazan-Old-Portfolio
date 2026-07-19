@@ -44,31 +44,22 @@ function HomePage() {
 
           <TypeAnimation
             sequence={[
-              "Software Engineer_",
+              "Backend Engineer_",
               2000,
               "",
-              "MERN Stack Developer_",
+              "NestJS & Node.js Expert_",
               2000,
               "",
-              "Web Developer_",
+              "Microservices Developer_",
               2000,
               "",
-              "Mobile app Developer_",
+              "Distributed Systems Architect_",
               2000,
               "",
-              "Next.js Developer_",
+              "Event-Driven Developer_",
               2000,
               "",
-              "React.js Developer_",
-              2000,
-              "",
-              "React Native Developer_",
-              2000,
-              "",
-              "JavaScript Developer_",
-              2000,
-              "",
-              "Front-end Web Developer_",
+              "gRPC & Kafka Infrastructure Engineer_",
               2000,
               "",
             ]}
@@ -79,9 +70,12 @@ function HomePage() {
           />
 
           <p className="flex flex-col gap-4 mt-4 text-left text-text  text-sm md:text-base max-w-md">
-          <span >As a passionate MERN Stack developer, I enjoy building smooth, user-friendly web experiences that solve real-world problems. With a solid grip on React.js, Next.js, Node.js, Express, and MongoDB, I specialize in creating responsive interfaces and efficient backend systems.
-          </span>
-<span className="">Alongside, I’m experienced with Tailwind CSS and GitHub, which helps me maintain clean code and collaborate effectively. I always aim to learn and grow while crafting digital products that people actually love to use.</span>
+            <span>
+              I am a Backend Engineer focused on building production-ready backend systems and distributed architectures. I enjoy developing scalable services using NestJS, Node.js, gRPC, Kafka, PostgreSQL, MongoDB, Redis, and Docker.
+            </span>
+            <span className="">
+              Through projects like Waave, I design microservice architectures, asynchronous event-driven workflows, and high-performance APIs with a strong focus on reliability, maintainability, and developer experience.
+            </span>
           </p>
           </div>
           </div>

@@ -3,9 +3,9 @@ import React from 'react'
 import { FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { HiOutlineMail } from 'react-icons/hi'
 import MySkills from '../componenets/MySkills';
-import GitHubStats from '../componenets/GitHubStats';
 import { FiDownload } from "react-icons/fi";
 import BlogSection from '../componenets/GallerySection';
+import EducationTimeline from '../componenets/EducationTimeline';
 
 
 
@@ -24,7 +24,7 @@ const age = currentYear - birthYear;
 {/* social links */}
       <div className="flex  justify-center items-center gap-8 pb-6  my-6 border-b-1 border-gray-400">
             <a
-              href="mailto:your-email@example.com"
+              href="mailto:shariyershazan1@gmail.com"
               className="text-primary hover:scale-110  text-2xl"
               aria-label="Send Email"
             >
@@ -83,7 +83,7 @@ const age = currentYear - birthYear;
           {/* Address */}
           <div>
             <p className="font-semibold text-lg">Address:</p>
-            <p>Dhaka, Bangladesh</p>
+            <p>Tejgaon, Dhaka, Bangladesh</p>
           </div>
           {/* Freelance */}
           <div>
@@ -99,10 +99,10 @@ const age = currentYear - birthYear;
           {/* Language */}
           <div>
             <p className="font-semibold text-lg">Language</p>
-            <p>Bangla, English</p>
+            <p>English (Fluent), Bangla (Native), Hindi, Urdu</p>
           </div>
           <div>
-                  <a target="_blank" href='https://drive.google.com/file/d/1ynzYQHcYjNxNQxZyfW84zooNeundGdNk/view' className="my-4 w-max cursor-pointer group relative flex items-center  px-5 py-2 border-2 border-primary rounded-full text-primary overflow-hidden hover:text-white">
+                  <a target="_blank" href='https://drive.google.com/file/d/1vq9T0M7qWBFi7xLagAcx9nojvnApvJyQ/view?usp=sharing' className="my-4 w-max cursor-pointer group relative flex items-center  px-5 py-2 border-2 border-primary rounded-full text-primary overflow-hidden hover:text-white">
                    <span className="ml-8">Shazan's Resume</span>
                     <span className=" absolute -left-[4px]  flex items-center justify-center w-11 h-full rounded-full bg-primary  text-white z-10">
                       <FiDownload size={20}/>
@@ -145,10 +145,11 @@ const age = currentYear - birthYear;
         </div>
       </div>
 
+      {/* Experience & Education */}
+      <EducationTimeline />
+
       {/* skills */}
       <MySkills />
-
-      <GitHubStats />
 
 
     </div>
